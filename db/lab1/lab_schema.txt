@@ -1,0 +1,29 @@
+erDiagram
+
+    promotion_blocks {
+        int id(PK)
+        varchar content
+        integer company(FK)
+    }
+
+    promotion_companies ||--|{ promotion_blocks : contains
+    promotion_companies ||--|{ promotion_bindings : binds
+    promotion_sites ||--|{ promotion_bindings : binds
+
+    promotion_companies {
+        integer id(PK)
+        varchar company
+        boolean is_active
+    }
+    promotion_sites {
+        integer id(PK)
+        varchar url
+        varchar shortname
+    }
+
+    promotion_bindings {
+        integer id(PK)
+        integer  company_id(FK)
+        integer  site_id(FK)
+    }
+  
