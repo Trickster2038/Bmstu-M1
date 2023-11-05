@@ -1,0 +1,49 @@
+P = [
+    11, 10, 11, 11, 10, 11, 1,  0,  0
+]
+# E= [11, 10, 10, 11, 10, 0, 11, 10, 10]
+
+C = [
+    11, 10, 10, 1,  0,  0, 11, 10, 10
+]
+L = [
+     1,  0,  0, 1,  0,  0, 11, 10,  0
+]
+% O = [
+%      11, 11,  0,
+%       1,  1,  0,
+%      11, 11,  0
+% ]
+
+function retval=func1(x)
+   retval=bin2dec(sprintf('%d', x));
+endfunction 
+
+function retval=sqrr(x)
+   retval=x*x;
+endfunction 
+
+v1 = arrayfun(@func1, P)
+v2 = arrayfun(@func1, C)
+v3 = arrayfun(@func1, L)
+
+v1 = v1 - (sum(v1) / length(v1)) 
+v2 = v2 - (sum(v2) / length(v2)) 
+v3 = v3 - (sum(v3) / length(v3)) 
+
+ln1 = sqrt(sum(arrayfun(@sqrr, v1)))
+ln2 = sqrt(sum(arrayfun(@sqrr, v2)))
+ln3 = sqrt(sum(arrayfun(@sqrr, v3)))
+
+v1 = v1 / ln1
+v2 = v2 / ln2
+v3 = v3 / ln3
+
+vp = [v1; v2; v3]
+w =  transpose(vp) * vp
+a = inv(w)
+
+a*w
+
+q = [1 2 ; 3 4]
+q*inv(q)
